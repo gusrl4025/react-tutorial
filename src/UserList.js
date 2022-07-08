@@ -8,7 +8,7 @@ function User({ user, onRemove, onToggle }) {
             console.log('user 가 바뀌기 전');
             console.log(user);
         };
-    });
+    }, []);
     return (
         <div>
             <b
