@@ -1,4 +1,4 @@
-import React, { useRef, useState, useMemo } from 'react';
+import React, { useRef, useState, useMemo, useCallback } from 'react';
 //export한 Hello 컴포넌트를 불러온다.
 import Hello from './Hello';
 import Wrapper from './Wrapper';
@@ -18,13 +18,16 @@ function App() {
     email: ''
   });
   const { username, email } = inputs;
-  const onChange = e => {
-    const { name, value } = e.target;
-    setInputs({
-      ...inputs,
-      [name]: value
-    });
-  };
+  const onChange = useCallback(
+    e => {
+      const { name, value } = e.target;
+      setInputs({
+        ...inputs,
+        [name]: value
+      });
+    },
+    [inputs]
+  );
   const [users, setUsers] = useState([
     {
         id: 1,
