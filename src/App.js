@@ -46,6 +46,7 @@ function App() {
       email
     }
     setUsers([...users, user]);
+    // setUsers(users.concat(user));
 
     setInputs({
       username: '',
@@ -53,6 +54,12 @@ function App() {
     });
     nextId.current += 1;
   }
+
+  const onRemove = id => {
+    // user.id가 파라미터로 일치하지 않는 원소만 추출해서 새로운 배열을 만듦
+    setUsers(users.filter(user => user.id !== id));
+  }
+  
   return (
     <>
       <CreateUser
@@ -61,7 +68,7 @@ function App() {
         onChange={onChange}
         onCreate={onCreate}
       />
-      <UserList users={users} />
+      <UserList users={users} onRemove={onRemove}/>
     </>
   );
 }
