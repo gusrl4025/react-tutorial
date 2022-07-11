@@ -1,5 +1,6 @@
-import { useState, useCallback, useReducer } from 'react';
+import { useCallback, useReducer } from 'react';
 
+// useReducer 사용할 때
 function reducer(state, action) {
     switch(action.type) {
         case 'CHANGE':
@@ -18,21 +19,23 @@ function reducer(state, action) {
 }
 
 function useInputs(initialForm) {
+
+    // useState 사용할 떄
     // const [form, setForm] = useState(initialForm);
-    // // change
     // const onChange = useCallback(e => {
     //     const { name, value } = e.target;
     //     setForm(form => ({ ...form, [name]: value }));
     // }, []);
     // const reset = useCallback(() => setForm(initialForm, [initialForm]));
-    // reducer
+
+    // useReducer 사용할 떄
     const [form, dispatch] = useReducer(reducer, initialForm);
     const onChange = useCallback(e => {
         const { name, value } = e.target;
         dispatch({ type: 'CHANGE', name, value })
     }, []);
-    const reset = useCallback(() => dispatch({ type: 'RESET' }), []);
-    return [form, onChange, reset];
+    const onReset = useCallback(() => dispatch({ type: 'RESET' }), []);
+    return [form, onChange, onReset];
 }
 
 export default useInputs;
