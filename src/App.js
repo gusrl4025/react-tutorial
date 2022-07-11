@@ -18,15 +18,16 @@ function App() {
     email: ''
   });
   const { username, email } = inputs;
+  // 얘는 해줄 필요없는데 연습용으로 바꿔놨음
   const onChange = useCallback(
     e => {
       const { name, value } = e.target;
-      setInputs({
+      setInputs(inputs => ({
         ...inputs,
         [name]: value
-      });
+      }));
     },
-    [inputs]
+    []
   );
   const [users, setUsers] = useState([
     {
@@ -65,26 +66,26 @@ function App() {
       });
       nextId.current += 1;
     },
-    [users, username, email]
+    [username, email]
   );
 
   const onRemove = useCallback(
     id => {
       // user.id가 파라미터로 일치하지 않는 원소만 추출해서 새로운 배열을 만듦
-      setUsers(users.filter(user => user.id !== id));
+      setUsers(users => users.filter(user => user.id !== id));
     },
-    [users]
+    []
   );
 
   const onToggle = useCallback(
     id => {
-      setUsers(
+      setUsers(users =>
         users.map(user =>
           user.id === id ? {...user, active: !user.active} : user
         )
       );
     },
-    [users]
+    []
   );
 
   const count = useMemo(() => countActiveUsers(users), [users]);

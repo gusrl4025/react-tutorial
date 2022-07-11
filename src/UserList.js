@@ -14,7 +14,7 @@ function User({ user, onRemove, onToggle }) {
             <b
                 style={{
                     cursor: 'pointer',
-                    color: user.active ? 'green' : 'black'
+                    color: user.active ? 'green' : 'white'
                 }}
                 onClick={() => onToggle(user.id)}
             >
@@ -41,4 +41,4 @@ function UserList({ users, onRemove, onToggle }) {
     )
 }
 
-export default UserList;
+export default React.memo(UserList);
